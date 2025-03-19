@@ -7,10 +7,9 @@ body {
     display: grid;
     gap: 5px;
     padding: 5px;
-    border: 2px solid black;
+    border: 2px solid rgb(22, 223, 136);
+    border-radius: 10px;
     width: max-content;
-    max-height: 490px;
-    max-width: 490px;
     overflow: hidden; 
     margin: auto;
 }

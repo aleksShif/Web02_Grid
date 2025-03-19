@@ -30,13 +30,15 @@
         let cols = 2;
         
         function addRow() {
-            let grid = document.getElementById("grid");
-            for (let i = 0; i < cols; i++) {
-                let cell = document.createElement("div");
-                cell.className = "grid-item";
-                grid.appendChild(cell);
+            if (rows < 10) {
+                let grid = document.getElementById("grid");
+                for (let i = 0; i < cols; i++) {
+                    let cell = document.createElement("div");
+                    cell.className = "grid-item";
+                    grid.appendChild(cell);
+                }
+                rows++;
             }
-            rows++;
         }
         
         function removeRow() {
@@ -51,16 +53,18 @@
         }
 
         function addColumn() {
-            let grid = document.getElementById("grid");
-            cols++;
-            grid.style.gridTemplateColumns = `repeat(${cols}, 50px)`;
-            let newCells = [];
-            for (let i = 0; i < rows; i++) {
-                let cell = document.createElement("div");
-                cell.className = "grid-item";
-                newCells.push(cell);
+            if (cols < 10) {
+                let grid = document.getElementById("grid");
+                cols++;
+                grid.style.gridTemplateColumns = `repeat(${cols}, 50px)`;
+                let newCells = [];
+                for (let i = 0; i < rows; i++) {
+                    let cell = document.createElement("div");
+                    cell.className = "grid-item";
+                    newCells.push(cell);
+                }
+                newCells.forEach(cell => grid.appendChild(cell));
             }
-            newCells.forEach(cell => grid.appendChild(cell));
         }
 
         function removeColumn() {
