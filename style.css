@@ -19,9 +19,16 @@ body {
     align-items: center;
     justify-content: center;
     border: 1px solid black;
+    cursor: pointer;
 }
+
 button {
     margin: 5px;
     padding: 10px;
     cursor: pointer;
 }
+
+.selected {
+    background-color: lightgreen; 
+}
+

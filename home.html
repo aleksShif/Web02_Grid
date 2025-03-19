@@ -11,6 +11,9 @@
     <h1>Dynamic Grid</h1>
     <button onclick="addRow()">Add Row</button>
     <button onclick="addColumn()">Add Column</button>
+    <button onclick="color_All_uncolored_Cells()">Color all uncolored cells</button>
+    <button onclick="color_All_color_selected_Cells()">Color all color selected cells</button>
+    <button onclick="clear()">Clear</button>
     <div id="grid" class="grid-container" style="grid-template-columns: repeat(2, 50px);">
         <div class="grid-item">1</div>
         <div class="grid-item">2</div>
@@ -46,6 +49,55 @@
             }
             newCells.forEach(cell => grid.appendChild(cell));
         }
+
+
+
+
+        let selected = 'lightblue'
+
+
+
+        
+        grid.addEventListener('click', function() {
+            let gridItems = document.querySelectorAll(".grid-item");
+            gridItems.forEach( cell => {
+                cell.addEventListener('click', function() {
+                    if (!cell.classList.contains("selected")) { 
+                        cell.classList.add("selected");
+                    }else{
+                        cell.style.backgroundColor = selected
+                    }
+                })
+            })
+        });
+
+        function color_All_uncolored_Cells() {
+            let gridItems = document.querySelectorAll(".grid-item");
+            gridItems.forEach(cell => {
+                if (!cell.classList.contains("selected")) { 
+                    cell.classList.add("selected");
+                }
+            });
+        }
+
+        function color_All_color_selected_Cells() {
+            let gridItems = document.querySelectorAll(".grid-item");
+            gridItems.forEach(cell => {
+                    cell.style.backgroundColor = selected
+            });
+        }
+
+
+        function clear() {
+            let gridItems = document.querySelectorAll(".grid-item");
+            gridItems.forEach(cell => {
+                    cell.style.backgroundColor = 'lightgray'
+            });
+        }
+
+
+
+        
     </script>
     </body>
 </html>
