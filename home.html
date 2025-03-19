@@ -13,7 +13,7 @@
     <button onclick="addColumn()">Add Column</button>
     <button onclick="color_All_uncolored_Cells()">Color all uncolored cells</button>
     <button onclick="color_All_color_selected_Cells()">Color all color selected cells</button>
-    <button onclick="clear()">Clear</button>
+    <button onclick="clear_all()">Clear</button>
     <div id="grid" class="grid-container" style="grid-template-columns: repeat(2, 50px);">
         <div class="grid-item">1</div>
         <div class="grid-item">2</div>
@@ -54,7 +54,7 @@
 
 
         let selected = 'lightblue'
-
+        let secondSelected = 'pink'
 
 
         
@@ -62,11 +62,7 @@
             let gridItems = document.querySelectorAll(".grid-item");
             gridItems.forEach( cell => {
                 cell.addEventListener('click', function() {
-                    if (!cell.classList.contains("selected")) { 
-                        cell.classList.add("selected");
-                    }else{
                         cell.style.backgroundColor = selected
-                    }
                 })
             })
         });
@@ -74,8 +70,8 @@
         function color_All_uncolored_Cells() {
             let gridItems = document.querySelectorAll(".grid-item");
             gridItems.forEach(cell => {
-                if (!cell.classList.contains("selected")) { 
-                    cell.classList.add("selected");
+                if (cell.style.backgroundColor === 'lightgray' || cell.style.backgroundColor === '') { 
+                    cell.style.backgroundColor = secondSelected
                 }
             });
         }
@@ -88,7 +84,7 @@
         }
 
 
-        function clear() {
+        function clear_all() {
             let gridItems = document.querySelectorAll(".grid-item");
             gridItems.forEach(cell => {
                     cell.style.backgroundColor = 'lightgray'
