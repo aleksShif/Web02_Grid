@@ -9,43 +9,76 @@
 </head>
 <body>
     <h1>Dynamic Grid</h1>
-    <button onclick="addRow()">Add Row</button>
-    <button onclick="addColumn()">Add Column</button>
+    <div>
+        <button onclick="addRow()">Add Row</button>
+        <button onclick="addColumn()">Add Column</button>
+    </div>
+    <div>
+        <button onclick="removeRow()">Remove Row</button>
+        <button onclick="removeColumn()">Remove Column</button>
+    </div>
     <div id="grid" class="grid-container" style="grid-template-columns: repeat(2, 50px);">
-        <div class="grid-item">1</div>
-        <div class="grid-item">2</div>
-        <div class="grid-item">3</div>
-        <div class="grid-item">4</div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
     </div>
 
     <script>
+        let grid = document.getElementById("grid");
         let rows = 2;
         let cols = 2;
         
         function addRow() {
-            let grid = document.getElementById("grid");
-            for (let i = 0; i < cols; i++) {
-                let cell = document.createElement("div");
-                cell.className = "grid-item";
-                cell.textContent = grid.children.length + 1;
-                grid.appendChild(cell);
+            if (rows < 10) {
+                let grid = document.getElementById("grid");
+                for (let i = 0; i < cols; i++) {
+                    let cell = document.createElement("div");
+                    cell.className = "grid-item";
+                    grid.appendChild(cell);
+                }
+                rows++;
             }
-            rows++;
         }
         
-        function addColumn() {
-            let grid = document.getElementById("grid");
-            cols++;
-            grid.style.gridTemplateColumns = `repeat(${cols}, 50px)`;
-            let newCells = [];
-            for (let i = 0; i < rows; i++) {
-                let cell = document.createElement("div");
-                cell.className = "grid-item";
-                cell.textContent = grid.children.length + 1;
-                newCells.push(cell);
+        function removeRow() {
+            if (rows > 1) {
+                let grid = document.getElementById("grid");
+                let cells = Array.from(grid.children);
+                for (let i = 0; i < cols; i++) {
+                    grid.removeChild(cells[i * rows + (rows - 1)]);
+                }
+                rows--;
             }
-            newCells.forEach(cell => grid.appendChild(cell));
         }
+
+        function addColumn() {
+            if (cols < 10) {
+                let grid = document.getElementById("grid");
+                cols++;
+                grid.style.gridTemplateColumns = `repeat(${cols}, 50px)`;
+                let newCells = [];
+                for (let i = 0; i < rows; i++) {
+                    let cell = document.createElement("div");
+                    cell.className = "grid-item";
+                    newCells.push(cell);
+                }
+                newCells.forEach(cell => grid.appendChild(cell));
+            }
+        }
+
+        function removeColumn() {
+            if (cols > 1) {
+                let grid = document.getElementById("grid");
+                let cells = Array.from(grid.children);
+                for (let i = rows - 1; i >= 0; i--) {
+                    grid.removeChild(cells[i * cols + (cols - 1)]);
+                }
+                cols--;
+                grid.style.gridTemplateColumns = `repeat(${cols}, 50px)`;
+            }
+        }
+
     </script>
     </body>
 </html>
