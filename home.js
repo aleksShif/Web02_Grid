@@ -52,3 +52,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderGrid();
 });
+
+
+
+let selected = 'lightblue'
+let secondSelected = 'pink'
+
+
+
+grid.addEventListener('click', function() {
+    let gridItems = document.querySelectorAll(".grid-item");
+    gridItems.forEach( cell => {
+        cell.addEventListener('click', function() {
+                cell.style.backgroundColor = selected
+        })
+    })
+});
+
+function color_All_uncolored_Cells() {
+    let gridItems = document.querySelectorAll(".grid-item");
+    gridItems.forEach(cell => {
+        if (cell.style.backgroundColor === 'lightgray' || cell.style.backgroundColor === '') { 
+            cell.style.backgroundColor = secondSelected
+        }
+    });
+}
+
+function color_All_color_selected_Cells() {
+    let gridItems = document.querySelectorAll(".grid-item");
+    gridItems.forEach(cell => {
+            cell.style.backgroundColor = selected
+    });
+}
+
+
+function clear_all() {
+    let gridItems = document.querySelectorAll(".grid-item");
+    gridItems.forEach(cell => {
+            cell.style.backgroundColor = 'lightgray'
+    });
+}
+
+
+
+
+
