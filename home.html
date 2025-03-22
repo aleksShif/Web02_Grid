@@ -8,6 +8,8 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+    <div class="triangle1"></div>
+    <div class="triangle2"></div>
     <h1>Dynamic Grid</h1>
     <div>
         <button  id="removeRowButton">Remove Row</button>
@@ -17,6 +19,25 @@
         <button onclick="color_All_uncolored_Cells()">Color all uncolored cells</button>
         <button onclick="color_All_color_selected_Cells()">Color all color selected cells</button>
         <button onclick="clear_all()">Clear</button>
+        <div>
+            <select id="color-dropdown">
+                <option value="Green">Green</option>
+                <option value="Blue">Blue</option>
+                <option value="Orange">Orange</option>
+                <option value="Pink">Pink</option>
+                <option value="Purple">Purple</option>
+            </select>
+            <button id="setColorButton">Set Color</button>
+            <p1 id="currColor">Current Color: Green</p1>
+        </div>
+        <!--
+
+        Pink: #ffbef7
+        +2) Pastel Green: #d3fed8
+        +3) Light Blue: #d7f6ff
+        +4) Pastel Orange: #FBCEB1
+        +5) Purple: #cdaece
+    -->    
     </div>
     <div id="grid" class="grid-container" style="grid-template-columns: repeat(2, 50px);">
         <div class="grid-item"></div>
