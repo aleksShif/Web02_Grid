@@ -1,9 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     let rows = 2;
     let cols = 2;
+    const gridContainer = document.getElementById('grid');
 
     const addRow = () => {
         if (rows < 10) {
+            for (let i = 0; i < cols; i++) {
+                const gridItem = document.createElement('div');
+                gridItem.className = 'grid-item';
+                gridContainer.appendChild(gridItem);
+            }
             rows++;
             renderGrid();
         }
@@ -11,6 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const removeRow = () => {
         if (rows > 1) {
+            for (let i = 0; i < cols; i++) {
+                gridContainer.removeChild(gridContainer.lastChild);
+            }
             rows--;
             renderGrid();
         }
@@ -18,6 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const addColumn = () => {
         if (cols < 10) {
+            const gridItems = Array.from(gridContainer.children);
+            for (let i = 0; i < rows; i++) {
+                const gridItem = document.createElement('div');
+                gridItem.className = 'grid-item';
+                gridContainer.insertBefore(gridItem, gridItems[(i+1) * cols]);
+            }
             cols++;
             renderGrid();
         }
@@ -25,24 +40,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const removeColumn = () => {
         if (cols > 1) {
+            const gridItems = Array.from(gridContainer.children);
+            for (let i = rows - 1; i >= 0; i--) {
+                gridContainer.removeChild(gridItems[(i+1) * cols - 1]);
+            }
             cols--;
             renderGrid();
         }
     };
 
+    const renderGrid = () => {
+        gridContainer.style.gridTemplateColumns = `repeat(${cols}, 50px)`;
+    };
+    
     const createGrid = () => {
-        const gridContainer = document.getElementById('grid');
-        gridContainer.innerHTML = '';
+        gridContainer.innerHTML = ''; 
         for (let i = 0; i < rows * cols; i++) {
             const gridItem = document.createElement('div');
             gridItem.className = 'grid-item';
             gridContainer.appendChild(gridItem);
-        }
-        gridContainer.style.gridTemplateColumns = `repeat(${cols}, 50px)`;
-    };
-
-    const renderGrid = () => {
-        createGrid();
+        }    
     };
 
     document.getElementById('addRowButton').addEventListener('click', addRow);
@@ -50,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('addColumnButton').addEventListener('click', addColumn);
     document.getElementById('removeColumnButton').addEventListener('click', removeColumn);
 
-    renderGrid();
+    createGrid();
 
 
 
@@ -127,9 +144,7 @@ function color_All_uncolored_Cells() {
 function color_All_color_selected_Cells() {
     let gridItems = document.querySelectorAll(".grid-item");
     gridItems.forEach(cell => {
-        if (!(cell.style.backgroundColor === 'lightgray' || cell.style.backgroundColor === '')){
-            cell.style.backgroundColor = selected
-        }
+    cell.style.backgroundColor = selected    
     });
 }
 
